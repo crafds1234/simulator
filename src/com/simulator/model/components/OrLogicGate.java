@@ -2,6 +2,7 @@ package com.simulator.model.components;
 
 import java.awt.Image;
 
+import com.simulator.model.ConnectionEntity;
 import com.simulator.model.LogicGate;
 
 public class OrLogicGate extends LogicGate {
@@ -18,6 +19,18 @@ public class OrLogicGate extends LogicGate {
 	public void respond() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean getLogicGateValue() {
+		ConnectionEntity first = getFirstConnectionEntry();
+		ConnectionEntity second = getFirstConnectionEntry();
+		
+		if(first == null || second == null) {
+			return false;
+		}
+		
+		return first.isStatus() || second.isStatus();
 	}
 
 }

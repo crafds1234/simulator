@@ -17,7 +17,7 @@ public class Publisher<T extends Subscriber> implements Serializable {
 	
 	public void notifySubscribers() {
 		for (T subscriber : subscribers) {
-			subscriber.respond(); //TODO
+			subscriber.respond();
 		}
 	}
 	

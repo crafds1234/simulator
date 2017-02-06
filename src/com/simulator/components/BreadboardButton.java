@@ -29,7 +29,7 @@ public class BreadboardButton extends Button implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		stateManager.setState(buttonState);
-		System.out.println(buttonState.getGate());
+		System.out.println(buttonState.getState());
 	}
 
 }

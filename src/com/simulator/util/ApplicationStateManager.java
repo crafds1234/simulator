@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import com.simulator.model.AppStates;
 import com.simulator.model.LogicGate;
+import com.simulator.model.Publisher;
+import com.simulator.model.Subscriber;
 
-public class ApplicationStateManager implements Serializable {
+public class ApplicationStateManager extends Publisher<Subscriber> implements Serializable {
 	
 	/**	 * 	 */
 	private static final long serialVersionUID = 2204384468945797613L;
@@ -26,8 +28,24 @@ public class ApplicationStateManager implements Serializable {
 		return instance;
 	}
 	
+	public boolean isConnecting() {
+		return state != null && state.getState().equals("connect");		
+	}
+	
+	public boolean isConnectingStart() {
+		return state != null && state.getState().equals("connect") && state.getGate().equals("start");		
+	}
+	
+	public boolean isConnectingEnd() {
+		return state != null && state.getState().equals("connect") && state.getGate().equals("end");		
+	}
+	
 	public boolean isAdding() {
 		return state != null && state.getState().equals("add");
+	}
+	
+	public boolean isDragging() {
+		return state != null && state.equals(AppStates.DRAG);
 	}
 	
 	public String getGateToAdd() {
@@ -38,7 +56,7 @@ public class ApplicationStateManager implements Serializable {
 	}
 
 	public AppStates getState() {
-		return state;
+		return state == null ? AppStates.EMPTY : state;
 	}
 
 	public void setState(AppStates state) {

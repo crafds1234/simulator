@@ -1,12 +1,13 @@
 package com.simulator.app;
 
 import com.simulator.components.BreadboardFrame;
+import com.simulator.components.BreadboardStartFrame;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		BreadboardFrame frame = new BreadboardFrame();
-		frame.display();
+		BreadboardStartFrame start = new BreadboardStartFrame();
+		start.setVisible(true);
 	}
 
 }

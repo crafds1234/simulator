@@ -2,15 +2,18 @@ package com.simulator.model;
 
 public enum AppStates {
 	
-	DRAW("draw"),
-	DRAG("drag"),
 	ADD_AND("add", "and"),
 	ADD_OR("add", "or"),
 	ADD_NOR("add", "nor"),
 	ADD_XNOR("add", "xnor"),
 	ADD_NAND("add", "nand"),
 	ADD_XOR("add", "xor"),
+	CONNECT_START("connect", "start"),
+	CONNECT_END("connect", "end"),
 	REMOVE("remove"),
+	DRAW("draw"),
+	DRAG("drag"),
+	CLEAR("clear"),
 	EMPTY("empty");
 	
 	private String state;

@@ -24,6 +24,7 @@ public class BreadboardFrame extends Frame {
 		setSize(800, 530);
 		setResizable(false);
 		setBackground(Color.LIGHT_GRAY);
+		setLocationRelativeTo(null);
 		
 		setEventListeners();
 		

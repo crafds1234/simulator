@@ -1,11 +1,11 @@
 package com.simulator.model;
 
-public class ConnectionEntry extends ConnectionEntity implements Subscriber {
+public class ConnectionResult extends CanvasEntity implements Subscriber {
 
 	/**	 * 	 */
 	private static final long serialVersionUID = -9037120427951173345L;
 
-	public ConnectionEntry() {
+	public ConnectionResult() {
 		super();
 	}
 
@@ -14,5 +14,6 @@ public class ConnectionEntry extends ConnectionEntity implements Subscriber {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }

@@ -1,32 +1,40 @@
 package com.simulator.components.events;
 
-import java.awt.Canvas;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
-import java.util.List;
 
 import com.simulator.components.BreadboardCanvas;
+import com.simulator.model.CanvasEntity;
 import com.simulator.model.LogicGate;
-import com.simulator.model.Subscriber;
+import com.simulator.util.ApplicationStateManager;
+import com.simulator.util.EntitiesManagerFactory;
 import com.simulator.util.LogicGateImageFactory;
 
 public class CanvasMouseMotionListener implements MouseMotionListener {
 	
-	private BreadboardCanvas canvas;
-	
 	private LogicGateImageFactory factory;
+	private ApplicationStateManager stateManager;
+	private EntitiesManagerFactory entitiesManager;
 	
-	public CanvasMouseMotionListener(BreadboardCanvas canvas) {
+	public CanvasMouseMotionListener() {
 		super();
-		this.canvas = canvas;
 		factory = LogicGateImageFactory.getInstance();
+		stateManager = ApplicationStateManager.getInstance();
+		entitiesManager = EntitiesManagerFactory.getInstance();
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(stateManager.isDragging()) {
+			int x = e.getX();
+			int y = e.getY();
+			CanvasEntity entity = entitiesManager.getEntityOnHitBox(x, y);
+			if(entity == null) {
+				return; // will not trigger
+			}
+			
+			entitiesManager.updateEntityPosition(entity, x, y);
+		}
 		
 	}
 
