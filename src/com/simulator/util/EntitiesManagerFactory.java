@@ -11,21 +11,21 @@ import com.simulator.model.Subscriber;
 import com.simulator.model.components.LightBulb;
 
 public class EntitiesManagerFactory extends Publisher<Subscriber> {
-	
-	/**	 * 	 */
+
+	/** * */
 	private static final long serialVersionUID = 1L;
 
 	private static EntitiesManagerFactory factory;
-	
+
 	private LogicGateImageFactory logicGateImageFactory;
-	
+
 	private List<CanvasEntity> entities;
-	
+
 	private List<LogicGate> logicGates;
-	
+
 	private List<LightBulb> lightBulbs;
-	
-	private LogicGate connectingFirstGate;
+
+	private CanvasEntity connectingFirstEntity;
 
 	private EntitiesManagerFactory() {
 		entities = new ArrayList<>();
@@ -33,47 +33,47 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 		lightBulbs = new ArrayList<>();
 		logicGateImageFactory = LogicGateImageFactory.getInstance();
 	}
-	
+
 	public static EntitiesManagerFactory getInstance() {
-		if(factory == null) {
+		if (factory == null) {
 			factory = new EntitiesManagerFactory();
 		}
-		
+
 		return factory;
 	}
-	
+
 	public void updateEntityPosition(CanvasEntity gate, int x, int y) {
-		if(!entities.contains(gate)) {
-			return; //false alarm
+		if (!entities.contains(gate)) {
+			return; // false alarm
 		}
 		gate.setX(x);
 		gate.setY(y);
 		notifySubscribers();
 	}
-	
+
 	public void addEntity(CanvasEntity entity) {
-		if(entity == null) {
+		if (entity == null) {
 			return;
 		}
 		entities.add(entity);
-		
-		if(entity instanceof LogicGate) {
+
+		if (entity instanceof LogicGate) {
 			logicGates.add((LogicGate) entity);
-		} else if(entity instanceof LightBulb) {
+		} else if (entity instanceof LightBulb) {
 			lightBulbs.add((LightBulb) entity);
 		}
-		
+
 		notifySubscribers();
 	}
-	
+
 	public void removeEntity(LogicGate gate) {
-		if(gate == null || !(gate instanceof LogicGate)) {
+		if (gate == null || !(gate instanceof LogicGate)) {
 			return;
 		}
 		entities.remove(gate);
 		notifySubscribers();
 	}
-	
+
 	public void clear() {
 		entities.clear();
 		logicGates.clear();
@@ -84,59 +84,64 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 	public List<CanvasEntity> getEntities() {
 		return entities;
 	}
-	
+
 	public List<LogicGate> getLogicGateEntities() {
 		return logicGates;
 	}
-	
+
 	public List<LightBulb> getLightBulbEntities() {
 		return lightBulbs;
 	}
-	
+
 	public CanvasEntity getEntityOnHitBox(int x, int y) {
 		CanvasEntity firstInstance = null;
 		for (CanvasEntity logicGate : entities) {
-			if(logicGate.isHitbox(x, y)) {
+			if (logicGate.isHitbox(x, y)) {
 				firstInstance = logicGate;
 				break;
 			}
 		}
-		
+
 		return firstInstance;
 	}
-	
-	public boolean hasAnyHitBox(int x , int y) {
+
+	public boolean hasAnyHitBox(int x, int y) {
 		for (CanvasEntity logicGate : entities) {
-			if(logicGate.isHitbox(x, y)) {
+			if (logicGate.isHitbox(x, y)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public void addLogictGateToPaint(String strGate, int x, int y) {
+
+	public void addEntityToPaint(String strGate, int x, int y) {
 		try {
-			LogicGate gate = logicGateImageFactory.getGateModel(strGate);
-			Image image = logicGateImageFactory.getGateImage(strGate);
-			gate.setImage(image);
-			gate.setX(x);
-			gate.setY(y);
+			CanvasEntity entity = null;
+			if ("lightbulb".equals(strGate)) {
+				entity = logicGateImageFactory.getNewLightBulb();
+			} else {
+				entity = logicGateImageFactory.getGateModel(strGate);
+				Image image = logicGateImageFactory.getGateImage(strGate);
+				entity.setImage(image);
+			}
 			
-			addEntity(gate);
-		} catch(Exception e) {
+			entity.setX(x);
+			entity.setY(y);
+
+			addEntity(entity);
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("lol buggers");
 		}
 
 	}
 
-	public LogicGate getConnectingFirstGate() {
-		return connectingFirstGate;
+	public CanvasEntity getConnectingFirstEntity() {
+		return connectingFirstEntity;
 	}
 
-	public void setConnectingFirstGate(LogicGate connectingFirstGate) {
-		this.connectingFirstGate = connectingFirstGate;
+	public void setConnectingFirstEntity(CanvasEntity connectingFirstEntity) {
+		this.connectingFirstEntity = connectingFirstEntity;
 	}
-	
 
 }

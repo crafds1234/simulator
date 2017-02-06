@@ -16,7 +16,7 @@ public class BSwitch extends CanvasEntity {
 	public BSwitch(Image turnedOff, Image turnedOn) {
 		super();
 		setImage(turnedOff);
-		setTurnedOnImage(turnedOnImage);
+		setTurnedOnImage(turnedOn);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class BSwitch extends CanvasEntity {
 		if (isTurnedOn) {
 			return turnedOnImage;
 		}
-		return getImage();
+		return super.getImage();
 	}
 
 	public boolean isTurnedOn() {
@@ -46,6 +46,10 @@ public class BSwitch extends CanvasEntity {
 
 	public void setTurnedOnImage(Image turnedOnImage) {
 		this.turnedOnImage = turnedOnImage;
+	}
+	
+	public void toggle() {
+		isTurnedOn = !isTurnedOn;
 	}
 
 }

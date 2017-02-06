@@ -3,35 +3,37 @@ package com.simulator.model.components;
 import java.awt.Image;
 
 import com.simulator.model.CanvasEntity;
-import com.simulator.model.ConnectionEntity;
-import com.simulator.model.LogicGate;
 
 public class LightBulb extends CanvasEntity {
-	
-	/**	 * 	 */
+
+	/** * */
 	private static final long serialVersionUID = -4963446310477588535L;
-	
+
 	private boolean isTurnedOn;
-	
+
 	private Image turnedOnImage;
 
 	public LightBulb(Image turnedOff, Image turnedOn) {
 		super();
 		setImage(turnedOff);
-		setTurnedOnImage(turnedOnImage);
+		setTurnedOnImage(turnedOn);
 	}
 
 	@Override
 	public void respond() {
-		
+
 	}
-	
+
 	@Override
 	public Image getImage() {
-		if(isTurnedOn) {
+		if (isTurnedOn) {
 			return turnedOnImage;
 		}
-		return getImage();
+		return super.getImage();
+	}
+
+	public void toggle() {
+		isTurnedOn = !isTurnedOn;
 	}
 
 	public boolean isTurnedOn() {

@@ -32,7 +32,6 @@ public class CanvasMouseMotionListener implements MouseMotionListener {
 			if(entity == null) {
 				return; // will not trigger
 			}
-			
 			entitiesManager.updateEntityPosition(entity, x, y);
 		}
 		

@@ -3,6 +3,7 @@ package com.simulator.util;
 import java.io.Serializable;
 
 import com.simulator.model.AppStates;
+import com.simulator.model.CanvasEntity;
 import com.simulator.model.LogicGate;
 import com.simulator.model.Publisher;
 import com.simulator.model.Subscriber;
@@ -14,7 +15,7 @@ public class ApplicationStateManager extends Publisher<Subscriber> implements Se
 	
 	private static ApplicationStateManager instance;	
 	private AppStates state;
-	private LogicGate currentLogicGate;
+	private CanvasEntity currentLogicGate;
 	
 	private ApplicationStateManager() {
 		super();
@@ -61,13 +62,14 @@ public class ApplicationStateManager extends Publisher<Subscriber> implements Se
 
 	public void setState(AppStates state) {
 		this.state = state;
+		notifySubscribers();
 	}
 
-	public LogicGate getCurrentLogicGate() {
+	public CanvasEntity getCurrentLogicGate() {
 		return currentLogicGate;
 	}
 
-	public void setCurrentLogicGate(LogicGate currentLogicGate) {
+	public void setCurrentLogicGate(CanvasEntity currentLogicGate) {
 		this.currentLogicGate = currentLogicGate;
 	}
 

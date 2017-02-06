@@ -40,12 +40,12 @@ public class LogicGateImageFactory {
 			InputStream io1 = BreadboardResources.class.getResourceAsStream("lightbulboff.png");
 			Image image1 = ImageIO.read(io1);
 			Image scaledImage1 = image1.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
-			cache.put("off", scaledImage1);
+			cache.put("lightoff", scaledImage1);
 
 			InputStream io2 = BreadboardResources.class.getResourceAsStream("lightbulbon.png");
 			Image image2 = ImageIO.read(io2);
 			Image scaledImage2 = image2.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
-			cache.put("on", scaledImage2);
+			cache.put("lighton", scaledImage2);
 			
 //			InputStream io3 = BreadboardResources.class.getResourceAsStream("switchoff.png");
 //			Image image3 = ImageIO.read(io3);
@@ -96,7 +96,6 @@ public class LogicGateImageFactory {
 
 	public LogicGate getGateModel(String key) {
 		LogicGate gate = null;
-		;
 
 		switch (key) {
 		case OR:
@@ -124,7 +123,7 @@ public class LogicGateImageFactory {
 	}
 
 	public LightBulb getNewLightBulb() {
-		LightBulb bulb = new LightBulb(cache.get("off"), cache.get("on"));
+		LightBulb bulb = new LightBulb(cache.get("lightoff"), cache.get("lighton"));
 		bulb.setHeight(IMAGE_HEIGHT);
 		bulb.setWidth(IMAGE_WIDTH);
 		return bulb;

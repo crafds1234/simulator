@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Panel;
 
+import com.simulator.model.AppStates;
+
 public class BreadboardPanel extends Panel {
 
 	/**	 * 	 */
@@ -25,6 +27,7 @@ public class BreadboardPanel extends Panel {
 		add(new BreadboardButton("XNOR", ADD_XNOR));
 		add(new BreadboardButton("XOR", ADD_XOR));
 		add(new BreadboardButton("Connector", CONNECT_START));
+		add(new BreadboardButton("Lightbulb", AppStates.ADD_LIGHTBULB));
 		add(new BreadboardClearButton("CLEAR"));
 		
 	}

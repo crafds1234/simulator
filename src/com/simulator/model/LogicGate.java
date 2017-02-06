@@ -7,17 +7,63 @@ public abstract class LogicGate extends CanvasEntity {
 
 	private String label;
 
-	private ConnectionEntry firstConnectionEntry;
-
-	private ConnectionEntry secondConnectionEntry;
-
-	private ConnectionResult connectionResult;
+	private ConnectionEntry connectionResult;
+	
+	protected int firstMarginX;
+	protected int firstMarginY;
+	protected int secondMarginX;
+	protected int secondMarginY;
+	protected int thirdMarginX;
+	protected int thirdMarginY;
 
 	public LogicGate() {
 		super();
+		firstMarginX = -12;
+		secondMarginX = -12;
+		thirdMarginX = 65;
+		
+		firstMarginY = 10;
+		secondMarginY = 30;
+		thirdMarginY = 20;
+		
+		ConnectionEntry entry1 = new ConnectionEntry();
+		entry1.setEntityBind(this);
+		setFirstConnectionEntry(entry1);
+		
+		ConnectionEntry entry2 = new ConnectionEntry();
+		entry2.setEntityBind(this);
+		setSecondConnectionEntry(entry2);
+		
+		ConnectionEntry entry3 = new ConnectionEntry();
+		entry3.setEntityBind(this);
+		setConnectionResult(entry3);
 	}
 	
 	public abstract boolean  getLogicGateValue();
+	
+	public int getConnectorFirstX(){
+		return getCenterX() + firstMarginX;
+	}
+	
+	public int getConnectorFirstY() {
+		return getCenterY() + firstMarginY;
+	}
+	
+	public int getConnectorSecondX() {
+		return getCenterX() + secondMarginX;
+	}
+	
+	public int getConnectorSecondY() {
+		return getCenterY() + secondMarginY;
+	}
+	
+	public int getConnectorThirdX() {
+		return getCenterX() + thirdMarginX;
+	}
+	
+	public int getConnectorThirdY() {
+		return getCenterY() + thirdMarginY;
+	}
 
 	public String getLabel() {
 		return label;
@@ -27,27 +73,11 @@ public abstract class LogicGate extends CanvasEntity {
 		this.label = label;
 	}
 
-	public ConnectionEntry getFirstConnectionEntry() {
-		return firstConnectionEntry;
-	}
-
-	public void setFirstConnectionEntry(ConnectionEntry firstConnectionEntry) {
-		this.firstConnectionEntry = firstConnectionEntry;
-	}
-
-	public ConnectionEntry getSecondConnectionEntry() {
-		return secondConnectionEntry;
-	}
-
-	public void setSecondConnectionEntry(ConnectionEntry secondConnectionEntry) {
-		this.secondConnectionEntry = secondConnectionEntry;
-	}
-
-	public ConnectionResult getConnectionResult() {
+	public ConnectionEntry getConnectionResult() {
 		return connectionResult;
 	}
 
-	public void setConnectionResult(ConnectionResult connectionResult) {
+	public void setConnectionResult(ConnectionEntry connectionResult) {
 		this.connectionResult = connectionResult;
 	}
 

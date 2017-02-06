@@ -12,11 +12,13 @@ import com.simulator.model.Subscriber;
 
 public class BreadboardFrame extends Frame {
 
-	/**	 * 	 */
+	/** * */
 	private static final long serialVersionUID = -6440794451596077186L;
-	
+
 	private List<Subscriber> subscribers;
 	
+	public static BreadboardFrame frame;
+
 	public BreadboardFrame() {
 		super("Breadbord Simulator");
 		setLayout(new FlowLayout());
@@ -25,53 +27,54 @@ public class BreadboardFrame extends Frame {
 		setResizable(false);
 		setBackground(Color.LIGHT_GRAY);
 		setLocationRelativeTo(null);
-		
+
 		setEventListeners();
-		
+
 		BreadboardNav headerPanel = new BreadboardNav();
 		add(headerPanel);
-		
+
 		BreadboardPanel navPanel = new BreadboardPanel();
 		add(navPanel);
-		
+
 		BreadboardCanvas canvas = new BreadboardCanvas();
 		add(canvas);
+		
+		frame = this;
+
 	}
-	
+
 	private void setEventListeners() {
 		addWindowListener(new SimulatorWindowAdapter());
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
 	}
-	
-	
+
 	public void notifySubscribers() {
 		for (Subscriber subscriber : subscribers) {
-			subscriber.respond(); //TODO
+			subscriber.respond();
 		}
 	}
-	
+
 	public void addSubscriber(Subscriber subscriber) {
-		if(subscribers == null) {
+		if (subscribers == null) {
 			subscribers = new ArrayList<>();
 		}
-		
+
 		subscribers.add(subscriber);
 	}
-	
+
 	public void removeSubscriber(Subscriber subscriber) {
-		if(subscribers.contains(subscriber)) {
+		if (subscribers.contains(subscriber)) {
 			subscribers.remove(subscriber);
 		}
 		subscribers.add(subscriber);
 	}
-	
-	
+
 	public void display() {
-		if(this.isVisible()) {
+		if (this.isVisible()) {
 			return;
 		}
 		setVisible(true);

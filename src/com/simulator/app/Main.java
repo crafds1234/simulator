@@ -1,6 +1,5 @@
 package com.simulator.app;
 
-import com.simulator.components.BreadboardFrame;
 import com.simulator.components.BreadboardStartFrame;
 
 public class Main {

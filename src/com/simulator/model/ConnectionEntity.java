@@ -5,9 +5,11 @@ public class ConnectionEntity extends CanvasEntity implements Subscriber {
 	/**	 * 	 */
 	private static final long serialVersionUID = -9037120427951173345L;
 	
-	int x;
-	int y;
-	boolean status;
+	private int x;
+	private int y;
+	private boolean status;
+	private CanvasEntity entityBind;
+	private boolean hasConnection;
 
 	public ConnectionEntity() {
 		super();
@@ -41,6 +43,22 @@ public class ConnectionEntity extends CanvasEntity implements Subscriber {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	public CanvasEntity getEntityBind() {
+		return entityBind;
+	}
+
+	public void setEntityBind(CanvasEntity entityBind) {
+		this.entityBind = entityBind;
+	}
+
+	public boolean isHasConnection() {
+		return hasConnection;
+	}
+
+	public void setHasConnection(boolean hasConnection) {
+		this.hasConnection = hasConnection;
 	}
 
 }

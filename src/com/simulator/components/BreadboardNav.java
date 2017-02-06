@@ -31,6 +31,7 @@ public class BreadboardNav extends Panel implements Subscriber {
 		entitiesManager = EntitiesManagerFactory.getInstance();
 		entitiesManager.addSubscriber(this);
 		stateManager = ApplicationStateManager.getInstance();
+		stateManager.addSubscriber(this);
 		
 		label = new Label(labelText());
 		Font font = new Font("Serif",Font.PLAIN, 12);

@@ -14,14 +14,19 @@ public abstract class CanvasEntity implements Subscriber, Serializable {
 	private int width;
 	private int height;
 
+	private ConnectionEntry firstConnectionEntry;
+
+	private ConnectionEntry secondConnectionEntry;
+
 	public boolean isHitbox(int x, int y) {
 		return intersects(x, y, 1, 1);
 	}
+
 	public boolean intersects(double x, double y, double w, double h) {
-        double x0 = getCenterX();
-        double y0 = getCenterY();
-        return (x + w > x0 && y + h > y0 && x < x0 + getWidth() && y < y0 + getHeight());
-    }
+		double x0 = getCenterX();
+		double y0 = getCenterY();
+		return (x + w > x0 && y + h > y0 && x < x0 + getWidth() && y < y0 + getHeight());
+	}
 
 	public Image getImage() {
 		return image;
@@ -69,6 +74,22 @@ public abstract class CanvasEntity implements Subscriber, Serializable {
 
 	public int getCenterY() {
 		return y - (height / 2);
+	}
+
+	public ConnectionEntry getFirstConnectionEntry() {
+		return firstConnectionEntry;
+	}
+
+	public void setFirstConnectionEntry(ConnectionEntry firstConnectionEntry) {
+		this.firstConnectionEntry = firstConnectionEntry;
+	}
+
+	public ConnectionEntry getSecondConnectionEntry() {
+		return secondConnectionEntry;
+	}
+
+	public void setSecondConnectionEntry(ConnectionEntry secondConnectionEntry) {
+		this.secondConnectionEntry = secondConnectionEntry;
 	}
 
 }
