@@ -8,6 +8,7 @@ import com.simulator.model.CanvasEntity;
 import com.simulator.model.LogicGate;
 import com.simulator.model.Publisher;
 import com.simulator.model.Subscriber;
+import com.simulator.model.components.BSwitch;
 import com.simulator.model.components.LightBulb;
 
 public class EntitiesManagerFactory extends Publisher<Subscriber> {
@@ -25,12 +26,15 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 
 	private List<LightBulb> lightBulbs;
 
+	private List<BSwitch> switches;
+
 	private CanvasEntity connectingFirstEntity;
 
 	private EntitiesManagerFactory() {
 		entities = new ArrayList<>();
 		logicGates = new ArrayList<>();
 		lightBulbs = new ArrayList<>();
+		switches = new ArrayList<>();
 		logicGateImageFactory = LogicGateImageFactory.getInstance();
 	}
 
@@ -61,6 +65,8 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 			logicGates.add((LogicGate) entity);
 		} else if (entity instanceof LightBulb) {
 			lightBulbs.add((LightBulb) entity);
+		} else if (entity instanceof BSwitch) {
+			switches.add((BSwitch) entity);
 		}
 
 		notifySubscribers();
@@ -78,6 +84,7 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 		entities.clear();
 		logicGates.clear();
 		lightBulbs.clear();
+		switches.clear();
 		notifySubscribers();
 	}
 
@@ -91,6 +98,10 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 
 	public List<LightBulb> getLightBulbEntities() {
 		return lightBulbs;
+	}
+
+	public List<BSwitch> getSwitchEntities() {
+		return switches;
 	}
 
 	public CanvasEntity getEntityOnHitBox(int x, int y) {
@@ -119,12 +130,14 @@ public class EntitiesManagerFactory extends Publisher<Subscriber> {
 			CanvasEntity entity = null;
 			if ("lightbulb".equals(strGate)) {
 				entity = logicGateImageFactory.getNewLightBulb();
+			} else if ("switch".equals(strGate)) {
+				entity = logicGateImageFactory.getNewSwitch();
 			} else {
 				entity = logicGateImageFactory.getGateModel(strGate);
 				Image image = logicGateImageFactory.getGateImage(strGate);
 				entity.setImage(image);
 			}
-			
+
 			entity.setX(x);
 			entity.setY(y);
 

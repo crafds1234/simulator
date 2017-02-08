@@ -9,6 +9,7 @@ public enum AppStates {
 	ADD_NAND("add", "nand"),
 	ADD_XOR("add", "xor"),
 	ADD_LIGHTBULB("add", "lightbulb"),
+	ADD_SWITCH("add", "switch"),
 	CONNECT_START("connect", "start"),
 	CONNECT_END("connect", "end"),
 	REMOVE("remove"),

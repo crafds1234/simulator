@@ -1,10 +1,13 @@
 package com.simulator.components.events;
 
+import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import com.simulator.components.BreadboardFrame;
 import com.simulator.components.BreadboardOptionDialog;
+import com.simulator.components.LightBulbOptionDialog;
+import com.simulator.components.SwitchOptionDialog;
 import com.simulator.model.AppStates;
 import com.simulator.model.CanvasEntity;
 import com.simulator.model.LogicGate;
@@ -35,15 +38,15 @@ public class CanvasMouseListener implements MouseListener {
 			stateManager.setState(AppStates.EMPTY); // done adding
 		} else if (entitiesManager.hasAnyHitBox(x, y)) {
 			CanvasEntity entity = entitiesManager.getEntityOnHitBox(x, y);
+			Dialog dialog = null;
 			if(entity instanceof BSwitch) {
-				BSwitch bswitch = (BSwitch) entity;
-				bswitch.toggle();
-				entitiesManager.notifySubscribers(); //force notify
+				dialog = new SwitchOptionDialog(BreadboardFrame.frame, (BSwitch) entity);
 			} else if(entity instanceof LogicGate) { //show logic gate options
-				BreadboardOptionDialog dialog = new BreadboardOptionDialog(BreadboardFrame.frame, entity);
-				dialog.setVisible(true);
+				dialog = new BreadboardOptionDialog(BreadboardFrame.frame, entity);
+			} else if(entity instanceof LightBulb) {
+				dialog = new LightBulbOptionDialog(BreadboardFrame.frame, (LightBulb) entity);
 			}
-
+			dialog.setVisible(true);
 		}
 	}
 

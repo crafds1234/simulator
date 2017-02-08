@@ -47,15 +47,15 @@ public class LogicGateImageFactory {
 			Image scaledImage2 = image2.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
 			cache.put("lighton", scaledImage2);
 			
-//			InputStream io3 = BreadboardResources.class.getResourceAsStream("switchoff.png");
-//			Image image3 = ImageIO.read(io3);
-//			Image scaledImage3 = image3.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
-//			cache.put("switchoff", scaledImage3);
-//			
-//			InputStream io4 = BreadboardResources.class.getResourceAsStream("switchon.png");
-//			Image image4 = ImageIO.read(io4);
-//			Image scaledImage4 = image4.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
-//			cache.put("switchon", scaledImage4);
+			InputStream io3 = BreadboardResources.class.getResourceAsStream("switchoff.png");
+			Image image3 = ImageIO.read(io3);
+			Image scaledImage3 = image3.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
+			cache.put("switchoff", scaledImage3);
+			
+			InputStream io4 = BreadboardResources.class.getResourceAsStream("switchon.png");
+			Image image4 = ImageIO.read(io4);
+			Image scaledImage4 = image4.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT, 0);
+			cache.put("switchon", scaledImage4);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

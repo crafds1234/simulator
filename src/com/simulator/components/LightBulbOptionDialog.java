@@ -12,28 +12,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.simulator.model.CanvasEntity;
 import com.simulator.model.LogicGate;
 import com.simulator.model.components.BSwitch;
+import com.simulator.model.components.LightBulb;
 import com.simulator.util.ApplicationStateManager;
 import com.simulator.util.EntitiesManagerFactory;
 
-public class BreadboardOptionDialog extends Dialog {
+public class LightBulbOptionDialog extends Dialog {
 
 	/** * */
 	private static final long serialVersionUID = -7538661923335231388L;
 
 	private Button close;
 	private Button connect1;
-	private Button connect2;
-	private Button connect3;
 
-	private final CanvasEntity entity;
+	private final LightBulb entity;
 
 	private ApplicationStateManager statemanager;
 	private EntitiesManagerFactory entitymanager;
 
-	public BreadboardOptionDialog(Frame owner, CanvasEntity entity) {
+	public LightBulbOptionDialog(Frame owner, LightBulb entity) {
 		super(owner, true);
 
 		this.entity = entity;
@@ -45,9 +43,7 @@ public class BreadboardOptionDialog extends Dialog {
 		statemanager = ApplicationStateManager.getInstance();
 		entitymanager = EntitiesManagerFactory.getInstance();
 		close = new Button("Close");
-		connect1 = new Button("Connect to line 1");
-		connect2 = new Button("Connect to line 2");
-		connect3 = new Button("Connect output to..");
+		connect1 = new Button("Connect to output");
 
 		setEventListeners();
 
@@ -55,13 +51,10 @@ public class BreadboardOptionDialog extends Dialog {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		panel.setPreferredSize(new Dimension(200, 200));
 
-		if(statemanager.getCurrentLogicGate() == entity) {
-			close.setLabel("Same gate lol");
-		}else if (statemanager.getCurrentLogicGate() != null || statemanager.getbSwitchFirstEntity() != null) {
+		if (statemanager.getCurrentLogicGate() != null || statemanager.getbSwitchFirstEntity() != null) {
 			panel.add(connect1);
-			panel.add(connect2);
 		} else {
-			panel.add(connect3);
+			close.setLabel("Please choose a gate..");
 		}
 
 		panel.add(close);
@@ -93,62 +86,26 @@ public class BreadboardOptionDialog extends Dialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LogicGate gate2 = (LogicGate) entity;
-
 				if (statemanager.isConnectedToSwitch()) {
 					BSwitch bSwitch = (BSwitch) statemanager.getbSwitchFirstEntity();
-					
-					gate2.setFirstConnectionEntry(bSwitch.getFirstConnectionEntry());
-					gate2.getFirstConnectionEntry().setHasConnection(true);
 
+					entity.setFirstConnectionEntry(bSwitch.getFirstConnectionEntry());
+					entity.getFirstConnectionEntry().setHasConnection(true);
 				} else {
 					LogicGate gate = (LogicGate) statemanager.getCurrentLogicGate();
 
-					gate2.setFirstConnectionEntry(gate.getConnectionResult());
-					gate2.getFirstConnectionEntry().setHasConnection(true);
+					entity.setFirstConnectionEntry(gate.getConnectionResult());
+					entity.getFirstConnectionEntry().setHasConnection(true);
 				}
-
+				statemanager.setbSwitchFirstEntity(null);
 				statemanager.setCurrentLogicGate(null);
+				
 				statemanager.notifySubscribers();
 				entitymanager.notifySubscribers();
 				dispose();
 			}
 		});
 
-		connect2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				LogicGate gate2 = (LogicGate) entity;
-
-				if (statemanager.isConnectedToSwitch()) {
-					BSwitch bSwitch = (BSwitch) statemanager.getbSwitchFirstEntity();
-					
-					gate2.setSecondConnectionEntry(bSwitch.getFirstConnectionEntry());
-					gate2.getSecondConnectionEntry().setHasConnection(true);
-
-				} else {
-					LogicGate gate = (LogicGate) statemanager.getCurrentLogicGate();
-					
-					gate2.setSecondConnectionEntry(gate.getConnectionResult());
-					gate2.getSecondConnectionEntry().setHasConnection(true);
-				}
-
-				statemanager.setCurrentLogicGate(null);
-				statemanager.notifySubscribers();
-				entitymanager.notifySubscribers();
-				dispose();
-			}
-		});
-
-		connect3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				statemanager.setCurrentLogicGate(entity);
-				dispose();
-			}
-		});
 	}
 
 }
