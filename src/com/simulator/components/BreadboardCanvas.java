@@ -22,6 +22,8 @@ public class BreadboardCanvas extends Canvas implements Subscriber, Printable {
 
 	/** * */
 	private static final long serialVersionUID = -2080848459113950071L;
+	
+	public static Canvas canvas;
 
 	private EntitiesManagerFactory entitiesManager;
 	private BreadboardResources resourceManager;
@@ -35,6 +37,7 @@ public class BreadboardCanvas extends Canvas implements Subscriber, Printable {
 		setBackground(Color.WHITE);
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+		canvas = this;
 		resourceManager = BreadboardResources.getInstance();
 		entitiesManager = EntitiesManagerFactory.getInstance();
 		entitiesManager.addSubscriber(this);

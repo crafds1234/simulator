@@ -27,6 +27,7 @@ public class BreadboardPanel extends Panel {
 		add(new BreadboardButton("XOR", ADD_XOR));
 		add(new BreadboardButton("Switch", AppStates.ADD_SWITCH));
 		add(new BreadboardButton("Lightbulb", AppStates.ADD_LIGHTBULB));
+		add(new PrintButton("PRINT"));
 		add(new BreadboardClearButton("CLEAR"));
 
 	}
