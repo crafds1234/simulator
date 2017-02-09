@@ -3,9 +3,7 @@ package com.simulator.components.events;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import com.simulator.components.BreadboardCanvas;
 import com.simulator.model.CanvasEntity;
-import com.simulator.model.LogicGate;
 import com.simulator.util.ApplicationStateManager;
 import com.simulator.util.EntitiesManagerFactory;
 import com.simulator.util.LogicGateImageFactory;

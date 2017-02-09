@@ -62,12 +62,10 @@ public class CanvasMouseListener implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Mouse Released");
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		System.out.println("Mouse Entered");
 	}
 
 	@Override

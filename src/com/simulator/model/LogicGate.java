@@ -115,8 +115,6 @@ public abstract class LogicGate extends CanvasEntity {
 
 			ConnectionEntry secondEntry = getSecondConnectionEntry();
 			boolean secondResult = false;
-			System.out.println(entity);
-			System.out.println(secondEntry.getEntityBind());
 			if (secondEntry.isHasConnection() && entity != secondEntry.getEntityBind()) {
 				if (secondEntry.getEntityBind() instanceof LogicGate) {
 					secondResult = ((LogicGate) (secondEntry.getEntityBind())).getResult(secondEntry.getEntityBind());
