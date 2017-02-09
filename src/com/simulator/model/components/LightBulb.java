@@ -4,13 +4,13 @@ import java.awt.Image;
 
 import com.simulator.model.CanvasEntity;
 import com.simulator.model.ConnectionEntry;
+import com.simulator.model.LogicGate;
 
 public class LightBulb extends CanvasEntity {
 
 	/** * */
 	private static final long serialVersionUID = -4963446310477588535L;
 
-	private boolean isTurnedOn;
 
 	private Image turnedOnImage;
 
@@ -37,15 +37,29 @@ public class LightBulb extends CanvasEntity {
 
 	@Override
 	public Image getImage() {
-		if (isTurnedOn) {
+		if (isTurnedOn()) {
 			return turnedOnImage;
 		}
 		return super.getImage();
 	}
-
-	public void toggle() {
-		isTurnedOn = !isTurnedOn;
+	
+	private boolean isTurnedOn() {
+		if(!getFirstConnectionEntry().isHasConnection()) {
+			return false;
+		}
+		CanvasEntity connection = getFirstConnectionEntry().getEntityBind();
+		if(connection instanceof BSwitch) {
+			BSwitch bSwitch = (BSwitch) connection;
+			return bSwitch.isTurnedOn();
+		} else if(connection instanceof LogicGate) {
+			LogicGate gate = (LogicGate) connection;
+			return gate.getResult();
+		}
+		
+		return false; //will most be an unreachable code
 	}
+	
+
 
 	public int getConnectorFirstX() {
 		return getCenterX() + firstMarginX;
@@ -53,14 +67,6 @@ public class LightBulb extends CanvasEntity {
 
 	public int getConnectorFirstY() {
 		return getCenterY() + firstMarginY;
-	}
-
-	public boolean isTurnedOn() {
-		return isTurnedOn;
-	}
-
-	public void setTurnedOn(boolean isTurnedOn) {
-		this.isTurnedOn = isTurnedOn;
 	}
 
 	public Image getTurnedOnImage() {

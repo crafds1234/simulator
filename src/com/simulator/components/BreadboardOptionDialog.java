@@ -100,6 +100,7 @@ public class BreadboardOptionDialog extends Dialog {
 					
 					gate2.setFirstConnectionEntry(bSwitch.getFirstConnectionEntry());
 					gate2.getFirstConnectionEntry().setHasConnection(true);
+					gate2.getFirstConnectionEntry().setStatus(true);
 
 				} else {
 					LogicGate gate = (LogicGate) statemanager.getCurrentLogicGate();
@@ -126,6 +127,7 @@ public class BreadboardOptionDialog extends Dialog {
 					
 					gate2.setSecondConnectionEntry(bSwitch.getFirstConnectionEntry());
 					gate2.getSecondConnectionEntry().setHasConnection(true);
+					gate2.getSecondConnectionEntry().setStatus(true);
 
 				} else {
 					LogicGate gate = (LogicGate) statemanager.getCurrentLogicGate();

@@ -2,6 +2,7 @@ package com.simulator.model.components;
 
 import java.awt.Image;
 
+import com.simulator.model.CanvasEntity;
 import com.simulator.model.ConnectionEntity;
 import com.simulator.model.LogicGate;
 
@@ -31,6 +32,17 @@ public class OrLogicGate extends LogicGate {
 		}
 		
 		return first.isStatus() || second.isStatus();
+	}
+
+	@Override
+	public boolean getLogicGateValue(CanvasEntity firstEntry, CanvasEntity secondEntry) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getLogicGateValue(boolean first, boolean second) {
+		return first || second;
 	}
 
 }
